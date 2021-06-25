@@ -6,7 +6,7 @@
 #include <linux/device.h>
 #include <linux/sched.h>
 #include <asm/uaccess.h>
-#include <linux/gpio/consumer.h> 
+#include <linux/gpio/consumer.h>
 
 struct _customled_data {
 	struct cdev cdev;
@@ -61,7 +61,7 @@ static ssize_t customled_write(struct file *file, const char __user *user_buffer
 		gpiod_set_value(customled_data.gpio_pin, val);
 		customled_data.data = val;
 		printk(KERN_INFO "LED status: %d", val);
-		return 2;
+		return size;
 	}
 
 	printk(KERN_ERR "customled: Wrong data, must be 1 or 0");
